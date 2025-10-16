@@ -1,0 +1,53 @@
+{{ define "main" }}
+  {{ partial "validate-required.html" . }}
+
+  {{/* Helpers */}}
+  {{- $authors := .Params.article_article_authors -}}
+  {{- $authorsFmt := "" -}}
+  {{- if eq (len $authors) 1 -}}
+    {{- $authorsFmt = index $authors 0 -}}
+  {{- else if eq (len $authors) 2 -}}
+    {{- $authorsFmt = printf "%s and %s" (index $authors 0) (index $authors 1) -}}
+  {{- else -}}
+    {{- $last := index $authors (sub (len $authors) 1) -}}
+    {{- $rest := first (sub (len $authors) 1) $authors -}}
+    {{- $authorsFmt = printf "%s, and %s" (delimit $rest ", ") $last -}}
+  {{- end -}}
+
+  {{- $title := .Params.article_title -}}
+  {{- $venue := .Params.article_venue -}}
+  {{- $year := .Params.article_publication_year -}}
+  {{- $doi := .Params.article_doi -}}
+  {{- $doiURL := cond (strings.HasPrefix $doi "http") $doi (printf "https://doi.org/%s" $doi) -}}
+  {{- $oa := .Params.article_oaurl -}}
+
+  <article class="mw7 center ph3 pv4">
+    <header class="mb3">
+      <h1 class="f2 lh-title">{{ .Title }}</h1>
+    </header>
+
+    {{/* Emphasized OA link above the citation */}}
+    <section class="mb3">
+      <div class="bg-washed-yellow ba b--gold pa3 br2">
+        <span class="b">Open access:</span>
+        <a href="{{ $oa }}" class="link dark-blue underline" target="_blank" rel="noopener">{{ $oa }}</a>
+      </div>
+    </section>
+
+    {{/* Chicago-style citation */}}
+    <section class="mb4">
+      <p class="lh-copy f4">
+        {{ $authorsFmt }}.
+        “{{ $title }}.”
+        <em>{{ $venue }}</em>,
+        {{ $year }}.
+        DOI:
+        <a href="{{ $doiURL }}" class="link dark-blue underline" target="_blank" rel="noopener">{{ $doiURL }}</a>.
+      </p>
+    </section>
+
+    <section class="prose">
+      {{ .Content }}
+    </section>
+  </article>
+{{ end }}

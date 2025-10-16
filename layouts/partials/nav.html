@@ -1,0 +1,25 @@
+<nav>
+  <ul>
+    {{ range .Site.Menus.main }}
+      <li>
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+
+        {{ if eq .Identifier "topics-menu" }}
+          <ul>
+            {{ $terms := slice }}
+            {{ range $name, $_ := site.Taxonomies.topics }}
+              {{ $terms = $terms | append $name }}
+            {{ end }}
+            {{ range sort $terms }}
+              {{ $t := . }}
+              {{ $p := site.GetPage (printf "/topics/%s" (urlize $t)) }}
+              <li><a href="{{ $p.RelPermalink }}">{{ $t }}</a></li>
+            {{ end }}
+          </ul>
+        {{ end }}
+
+      </li>
+    {{ end }}
+  </ul>
+</nav>
+:

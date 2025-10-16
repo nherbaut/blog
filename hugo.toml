@@ -1,7 +1,0 @@
-baseURL = 'https://nextnet.top/blog'
-languageCode = 'en-us'
-title = 'papers I read'
-theme = 'ananke'
-[caches]
-  [caches.images]
-    dir = ':cacheDir/images'

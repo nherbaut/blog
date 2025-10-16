@@ -1,0 +1,20 @@
+baseURL: 'https://nextnet.top/blog'
+languageCode:  'en-us'
+title: 'Notes on paper I read'
+theme: 'ananke'
+caches:
+  images:
+    dir: ':cacheDir/images'
+params:
+  subtitle: 'Sustainability and Trust in Information Systems Engineering'
+  contact:
+    email: 'nicolas.herbaut@u-bordeaux.fr'
+taxonomies:
+  tag: tags
+  doi: doi
+  oaurl: oaurl
+  topic: topics
+sectionPagesMenu: main
+
+
+

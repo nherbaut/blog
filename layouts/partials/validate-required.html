@@ -1,0 +1,21 @@
+{{/* Fail build if required article params are missing or empty */}}
+{{- $required := slice
+    "article_doi"
+    "article_oaurl"
+    "article_topics"
+    "article_article_authors"
+    "article_title"
+    "article_venue"
+    "article_publication_year"
+-}}
+
+{{- range $required -}}
+  {{- $v := index $.Params . -}}
+  {{- if not $v -}}
+    {{- errorf "Missing required param %q in %s" . $.File.Path -}}
+  {{- else if (and (reflect.IsSlice $v) (eq (len $v) 0)) -}}
+    {{- errorf "Empty slice for required param %q in %s" . $.File.Path -}}
+  {{- else if (and (not (reflect.IsSlice $v)) (eq (printf "%v" $v) "")) -}}
+    {{- errorf "Empty value for required param %q in %s" . $.File.Path -}}
+  {{- end -}}
+{{- end -}}
