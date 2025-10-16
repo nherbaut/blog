@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://nextnet.top/blog'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'papers I read'
 theme = 'ananke'
 [caches]
   [caches.images]
