@@ -1,0 +1,27 @@
+<section class="mw8 center ph3 pv4">
+  <h2 class="f3 lh-title">Browse</h2>
+  <div class="flex flex-wrap">
+    {{ range $taxName, $_ := site.Taxonomies }}
+      {{ $taxPage := site.GetPage (printf "/%s" $taxName) }}
+      {{ if $taxPage }}
+        <div class="w-50 w-25-ns mb4 pr3">
+          <h3 class="f5 mt0 mb2">
+            <a class="link dark-blue underline" href="{{ $taxPage.RelPermalink }}">
+              {{ title $taxName }}
+            </a>
+          </h3>
+          <ul class="list pl0 mv0">
+            {{ range first 8 $taxPage.Data.Terms.Alphabetical }}
+              {{ $tp := .Page }}
+              <li class="mb1">
+                <a class="link dark-gray underline" href="{{ $tp.RelPermalink }}">{{ $tp.LinkTitle | default .Term }}</a>
+                <span class="gray f7">({{ .Count }})</span>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+

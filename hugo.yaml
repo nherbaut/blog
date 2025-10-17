@@ -10,11 +10,12 @@ params:
   contact:
     email: 'nicolas.herbaut@u-bordeaux.fr'
 taxonomies:
-  tag: tags
-  doi: doi
-  oaurl: oaurl
-  topic: topics
-sectionPagesMenu: main
+  topic: article_topics
+  author: article_article_authors
+  venue: article_venue
+  year: article_publication_year
+
+
 
 
 

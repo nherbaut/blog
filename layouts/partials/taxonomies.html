@@ -1,0 +1,29 @@
+<section class="mw7 center ph3 pv4">
+  <h2 class="f3 lh-title">Taxonomies</h2>
+
+  <ul class="list pl0">
+    {{ range $taxName, $tax := site.Taxonomies }}
+      <li class="mb3">
+        <strong>
+          <a class="link dark-blue underline"
+             href="{{ (site.GetPage (printf "/%s" $taxName)).RelPermalink }}">
+             {{ title $taxName }}
+          </a>
+        </strong>
+
+        <ul class="list pl3 mt2">
+          {{ range $termName, $termPages := $tax }}
+            <li>
+              <a class="link dark-gray underline"
+                 href="{{ (site.GetPage (printf "/%s/%s" $taxName (urlize $termName))).RelPermalink }}">
+                 {{ $termName }}
+              </a>
+              <span class="gray f6">({{ len $termPages }})</span>
+            </li>
+          {{ end }}
+        </ul>
+      </li>
+    {{ end }}
+  </ul>
+</section>
+

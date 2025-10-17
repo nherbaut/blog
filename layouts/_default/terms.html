@@ -1,0 +1,15 @@
+{{ define "main" }}
+<section class="mw8 center ph3 pv4">
+  <h1 class="f2 lh-title">{{ title .Title }}</h1>
+  <ul class="list pl0">
+    {{ range .Data.Terms.Alphabetical }}
+      {{ $tp := .Page }}
+      <li class="mb2">
+        <a class="link dark-blue underline" href="{{ $tp.RelPermalink }}">{{ $tp.LinkTitle | default .Term }}</a>
+        <span class="gray f6">({{ .Count }})</span>
+      </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+

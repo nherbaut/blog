@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <section class="mw8 center ph3 pv4">
+    <h2 class="f3 lh-title">Articles</h2>
+    <ul class="list pl0">
+      {{ range where .Site.RegularPages "Section" "articles" }}
+        <li class="mb2">
+          <a class="link dark-blue underline" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </section>
+
+  {{ partial "taxonomy-browser.html" . }}
+{{ end }}
+
